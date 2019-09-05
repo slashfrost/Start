@@ -24,7 +24,7 @@ public class Main {
             sum = sum + human_num[i];
         }
         sum = sum / 3;
-        System.out.println("srednee: "+sum);
+        System.out.println("srednee: " + sum);
         delta1 = human_num[0] - sum;
         delta2 = human_num[1] - sum;
         delta3 = human_num[2] - sum;
@@ -36,7 +36,7 @@ public class Main {
             max_delta = delta3;
         }
         for (int j = 0; j < random_num.length; j++) {
-            random_num[j] = random.nextInt(sum-Math.abs(max_delta));
+            random_num[j] = random.nextInt(sum - Math.abs(max_delta));
             System.out.println(random_num[j]);
         }
 

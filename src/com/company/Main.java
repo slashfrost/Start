@@ -14,18 +14,19 @@ public class Main {
     public static void main(String[] args) throws IOException {
         List<String>lines=readLineByLine();
         String[] numbers_str;
-        Integer count = 0;
-        Integer sum = 0;
         String str=lines.toString();
         String str1 = str.replaceAll("\\D+", "");
         System.out.println(str);
-        System.out.println(str1);
         numbers_str = str1.split("");
-        for (int i = 0; i < numbers_str.length; i++) {
-            count = Integer.parseInt(numbers_str[i]);
-            sum = sum + count;
-        }
-        System.out.println("Ответ: "+sum);
+        Operation op=(count,sum)->{
+                for (int i = 0; i < numbers_str.length; i++) {
+                    count = Integer.parseInt(numbers_str[i]);
+                    sum = sum + count;
+                }
+                return sum;
+
+        };
+        System.out.println(op.calculate(0,0));
     }
     private static List<String> readLineByLine() throws IOException {
         List<String> lines = new ArrayList<>();
@@ -38,6 +39,9 @@ public class Main {
           e.printStackTrace();
         }
         return lines;
+    }
+    interface Operation{
+      public int  calculate(int sum,int count);
     }
 }
 

@@ -10,14 +10,26 @@ public class Main {
         Random random = new Random();
         Integer[] human_num = new Integer[3];
         Integer[] random_num = new Integer[3];
-        int delta1 = 0;
-        int delta2 = 0;
-        int delta3 = 0;
+        Integer[] delta = new Integer[3];
         int max_delta = 0;
-        int count = 0;
         int human = 0;
         int rand = 0;
         Integer sum = 0;
+        Operationable op = (int x, int y) -> {
+            if (x > y)
+                return x;
+            else
+                return y;
+        };
+        Operationable2 op2 = (int x, int y, int z, int p) -> {
+            if (x > y && x > z) {
+                p = x;
+            } else if (y > x && y > z) {
+                p = y;
+            } else {
+                p = z;
+            }
+        };
         for (int i = 0; i < human_num.length; i++) {
             System.out.println("input " + i + " number:");
             human_num[i] = in.nextInt();
@@ -25,16 +37,10 @@ public class Main {
         }
         sum = sum / 3;
         System.out.println("srednee: " + sum);
-        delta1 = human_num[0] - sum;
-        delta2 = human_num[1] - sum;
-        delta3 = human_num[2] - sum;
-        if (delta1 > delta2 && delta1 > delta3) {
-            max_delta = delta1;
-        } else if (delta2 > delta1 && delta2 > delta3) {
-            max_delta = delta2;
-        } else {
-            max_delta = delta3;
+        for (int a = 0; a < human_num.length; a++) {
+            delta[a] = human_num[a] - sum;
         }
+        op2.calculate(delta[0], delta[1], delta[2], max_delta);
         for (int j = 0; j < random_num.length; j++) {
             random_num[j] = random.nextInt(sum - Math.abs(max_delta));
             System.out.println(random_num[j]);
@@ -57,4 +63,11 @@ public class Main {
         }
     }
 
+    interface Operationable {
+        int calculate(int x, int y);
+    }
+
+    interface Operationable2 {
+        void calculate(int x, int y, int z, int p);
+    }
 }
